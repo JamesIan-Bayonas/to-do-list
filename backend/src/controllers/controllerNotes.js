@@ -1,5 +1,12 @@
-export function getAllNotes(req, res) {
-  res.status(200).send("Fetched notes successfully");
+import Note from "../models/Note.js";
+
+export async function getAllNotes(req, res) {
+  try {
+    const notes = await Note.find();
+    res.status(200).json(notes);
+  } catch (error) {
+    res.status(500).json({ message: "Internal error?" });
+  }
 }
 
 export function createNotes(req, res) {
