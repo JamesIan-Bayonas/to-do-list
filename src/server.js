@@ -3,7 +3,7 @@ import notesRoute from "./routes/notesRoute.js"; // import the notesRouter from 
 import { connectDB } from "./config/db.js"; // import the connectBD function from the db.js file
 import dotenv from "dotenv"; // import dotenv to use environment variables
 
-dotenv.config(); // this will load the environment variables from the .env file
+dotenv.config({ path: "../.env" }); // this will load the environment variables from the .env file
 
 const app = express(); // created an instance of express
 const PORT = process.env.PORT || 5001;
