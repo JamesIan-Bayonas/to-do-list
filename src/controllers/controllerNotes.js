@@ -14,10 +14,13 @@ export async function getAllNotes(req, res) {
 export async function createNotes(req, res) {
   try {
     const { title, content } = req.body;
-    const newNote = new Note({ title, content });
+    const note = new Note({ title, content });
 
-    await newNote.save(); // this will save the note to the database
-    res.status(201).json({ message: "Notes created successfully!" });
+    const savedNotes = await note.save(); // the keyword await is used to wait for the promise to be resolved before moving on to the next line of code
+    res.status(201).json({
+      message: "This is a message",
+      savedNotes,
+    });
   } catch (error) {
     console.error("Error in createNotes controller", error);
     res
@@ -27,7 +30,27 @@ export async function createNotes(req, res) {
 }
 
 export async function updateNotes(req, res) {
-  res.status(200).json({ message: "Notes have been successfully updated!" });
+  // this method is used to update the notes that the user alreadt has created!
+  try {
+    const { title, content } = req.body;
+    await Note.findByIdAndUpdate(
+      req.params.id,
+      {
+        title,
+        content,
+      },
+      { new: true }
+    );
+    if (!updateNote) {
+      return res
+        .status(404)
+        .json({ message: "The Note seem's to be not found!" }); // if the user is not found in this case
+    }
+    res.status(200).json({ message: "Note has been successfully updated!" });
+  } catch (error) {
+    console.error("Error in createNotes controller", error);
+    res.status(500).json({ message: "Error in updating sorry: :(" });
+  }
 }
 
 export async function deleteNotes(req, res) {
