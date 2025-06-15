@@ -16,3 +16,5 @@ app.use("/api/notes", notesRoute); // this is how we use the notesRouter in our 
 app.listen(5001, () => {
   console.log("Server started on PORT:: 5001");
 });
+
+// figure out how to connect MongoDB which is from the postman to the database in this case
