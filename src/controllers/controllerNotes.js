@@ -56,15 +56,32 @@ export async function updateNotes(req, res) {
 export async function deleteNotes(req, res) {
   try {
     const deleteNote = await Note.findByIdAndDelete(req.params.id);
-    if (!deleteNote)
-      return res.status(404).json({ message: "The user could not be found" }); // if the user is not found in this ca
-    res.json({ message: "Note has been successfully deleted!" }); // if the user and it is found then it will be deleted!
-    se;
+    if (!deleteNote) {
+      return res.status(404).json({ message: "The user could not be found" }); // If the user cannot be found
+    }
+    return res
+      .status(200)
+      .json({ message: "Note has been successfully deleted!" }); // if the user and it is found then it will be deleted!
   } catch (error) {
     console.error("Error in createNotes controller", error);
-    res
+    return res
       .status(500)
       .json({ message: "It seem's that the user cannot be found!" });
   }
-  res.status(200).json({ message: "Notes has been successfully deleted!" });
+  //res.status(200).json({ message: "Notes has been successfully deleted!" });
 }
+
+// export async function deleteNotes(req, res) {
+//   try {
+//     const deleteNote = await Note.findByIdAndDelete(req.params.id);
+//     if (!deleteNote)
+//       return res.status(404).json({ message: "The user could not be found" }); // If the user cannot be found
+//     res.status(200).json({ message: "Note has been successfully deleted!" }); // if the user and it is found then it will be deleted!
+//   } catch (error) {
+//     console.error("Error in createNotes controller", error);
+//     res
+//       .status(500)
+//       .json({ message: "It seem's that the user cannot be found!" });
+//   }
+//   res.status(200).json({ message: "Notes has been successfully deleted!" });
+// }

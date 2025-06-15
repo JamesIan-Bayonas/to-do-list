@@ -9,6 +9,7 @@ import {
 const router = express.Router();
 
 router.get("/", getAllNotes);
+router.get("/", getAllNotes);
 router.post("/", createNotes);
 router.put("/:id", updateNotes); // I am so learning hehe, so as you have notice the :id is considered to be putted in there because you can
 // get to see the id in the postman so this is a concept that is considered to be really important indeed.
