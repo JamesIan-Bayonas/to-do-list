@@ -4,7 +4,7 @@ export async function getAllNotes(req, res) {
   // export represents in react that it can be used in somewhere else's
   try {
     const notes = await Note.find(); // this will be run first and if this is considered to be false then
-    res.status(200).json(notes);
+    res.status(200).json(notes); // convert's the notes to JSON format and send it to the client
   } catch (error) {
     console.log("Error get allNotesMethod controller", error);
 

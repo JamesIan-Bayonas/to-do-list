@@ -10,7 +10,14 @@ const PORT = process.env.PORT || 5001;
 
 connectDB();
 
+//middleware
 app.use(express.json()); // this will parse the incoming request body as JSON via Postman or any other client
+app.use((req, res, next) => {
+  console.log(
+    `This is the Method used ${req.method} and this is the URL request${req.url}`
+  );
+  next();
+});
 app.use("/api/notes", notesRoute); // this is how we use the notesRouter in our app
 
 app.listen(5001, () => {
