@@ -1,17 +1,18 @@
-import express from "express"; // imports the framework:: (express.js) and take note that express is a function
+import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import notesRoute from "./routes/notesRoute.js"; // import the notesRouter from the notesRoute file
-import { connectDB } from "./config/db.js"; // import the connectBD function from the db.js file
-import dotenv from "dotenv"; // import dotenv to use environment variables
+import notesRoute from "./routes/notesRoute.js";
+import { connectDB } from "./config/db.js";
+import dotenv from "dotenv";
+import { initializeRatelimit } from "./config/upstash.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// :: IMPORTANT: THESE DEBUG LOGS ARE CRITICAL ::
 const envFilePath = path.resolve(__dirname, "../../.env");
+
 console.log("DEBUG: Attempting to load .env from:", envFilePath);
+
 const result = dotenv.config({ path: envFilePath });
 
 if (result.error) {
@@ -20,27 +21,49 @@ if (result.error) {
   console.log("DEBUG: .env variables successfully parsed:", result.parsed);
 } else {
   console.log(
-    "DEBUG: dotenv.config() ran, but no variables parsed or error reported (file might be empty or inaccessible)."
+    "DEBUG: dotenv.config() ran, but no variables parsed or error reported."
   );
 }
 
-/*:: console.log(
-  "DEBUG: Value of UPSTASH_REDIS_REST_URL from process.env:",
+console.log(
+  "DEBUG: Value of UPSTASH_REDIS_REST_URL:",
   process.env.UPSTASH_REDIS_REST_URL
-); :: important might be use in the future*/
+);
+console.log(
+  "DEBUG: Value of UPSTASH_REDIS_REST_TOKEN:",
+  process.env.UPSTASH_REDIS_REST_TOKEN
+);
 
 // === END DEBUG LOGS ===
-
-//dotenv.config({ path: "../.env" }); // this will load the environment variables from the .env file
 
 const app = express(); // created an instance of express
 const PORT = process.env.PORT || 5001;
 
 connectDB();
 
-//  :: middleware ::
+let ratelimitInstance;
+try {
+  ratelimitInstance = initializeRatelimit();
+  console.log("DEBUG: Upstash Ratelimit instance initialized successfully.");
+} catch (error) {
+  console.error(
+    "ERROR: Failed to initialize Upstash Ratelimit:",
+    error.message
+  );
+
+  process.exit(1);
+}
+
+// :: middleware ::
 app.use(express.json()); // this will parse the incoming request body as JSON via Postman or any other client
-app.use(rateLimiter);
+
+// NEW: Create a middleware that injects the ratelimit instance
+app.use((req, res, next) => {
+  req.ratelimit = ratelimitInstance; // Attach the ratelimit instance to the request object
+  next();
+});
+
+app.use(rateLimiter); // Apply the rate limiter middleware
 
 //  :: this is used to showcase how req and res work's in express under the hood ::
 app.use((req, _, next) => {
@@ -49,8 +72,9 @@ app.use((req, _, next) => {
   );
   next();
 });
-app.use("/api/notes", notesRoute); // this is how we use the notesRouter in our app
+app.use("/api/notes", notesRoute);
 
-app.listen(5001, () => {
+app.listen(PORT, () => {
+  // Use the PORT variable here
   console.log("Server started on PORT,", PORT);
 });
