@@ -1,5 +1,3 @@
-// backend/src/config/upstash.js
-
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
@@ -40,9 +38,3 @@ export function initializeRatelimit() {
 
   return ratelimit;
 }
-
-// Removed direct export of ratelimit.
-// export default ratelimit; // This line is removed.
-
-// res.status(500).json({ message: "It seem's that the user cannot be found!" });
-// making a comment

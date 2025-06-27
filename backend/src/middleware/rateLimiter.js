@@ -1,5 +1,3 @@
-// backend/src/middleware/rateLimiter.js
-
 // Removed direct import: `import ratelimit from "../config/upstash.js";`
 
 const rateLimiter = async (req, res, next) => {

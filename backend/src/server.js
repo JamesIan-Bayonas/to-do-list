@@ -39,8 +39,6 @@ console.log(
 const app = express(); // created an instance of express
 const PORT = process.env.PORT || 5001;
 
-connectDB();
-
 let ratelimitInstance;
 try {
   ratelimitInstance = initializeRatelimit();
@@ -74,7 +72,9 @@ app.use((req, _, next) => {
 });
 app.use("/api/notes", notesRoute);
 
-app.listen(PORT, () => {
-  // Use the PORT variable here
-  console.log("Server started on PORT,", PORT);
+connectDB().then(() => {
+  // it first checks the database connection thus right after connecting it.
+  app.listen(PORT, () => {
+    console.log("Server started on PORT,", PORT);
+  });
 });
