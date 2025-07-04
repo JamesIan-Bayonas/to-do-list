@@ -1,18 +1,20 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import Homepage from "./pages/Homepage";
-import NoteDetailpage from "./pages/NoteDetailpage";
 import Createpage from "./pages/Createpage";
-import toast from "react-hot-toast";
+import NoteDetailpage from "./pages/NoteDetailpage";
 
 const App = () => {
   return (
     <div>
-      <button onClick={() => toast.success("this is the first")}></button>
+      <button onClick={() => toast.success("this is the first")}>
+        Click me
+      </button>
       <Routes>
-        <Route path="/" element={<Homepage />}></Route>
-        <Route path="/" element={<NoteDetailpage />}></Route>
-        <Route path="/" element={<Createpage />}></Route>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/create" element={<NoteDetailpage />} />
+        <Route path="/note/:id" element={<Createpage />} />
       </Routes>
     </div>
   );
