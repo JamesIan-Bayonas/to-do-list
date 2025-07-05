@@ -8,7 +8,10 @@ import NoteDetailpage from "./pages/NoteDetailpage";
 const App = () => {
   return (
     <div>
-      <button onClick={() => toast.success("this is the first")}>
+      <button
+        onClick={() => toast.success("this is the first")}
+        className="text-red-500"
+      >
         Click me
       </button>
       <Routes>
