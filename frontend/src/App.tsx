@@ -10,14 +10,17 @@ const App = () => {
     <div>
       <button
         onClick={() => toast.success("this is the first")}
-        className="text-red-500"
+        className="text-red-500 p-4 bg-pink-300"
       >
         Click me
       </button>
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/create" element={<NoteDetailpage />} />
-        <Route path="/note/:id" element={<Createpage />} />
+        <Route path="/" element={<Homepage />} />{" "}
+        {/* this represent the default path of the url */}
+        <Route path="/create" element={<NoteDetailpage />} />{" "}
+        {/* this represent the second path  */}
+        <Route path="/note/:id" element={<Createpage />} />{" "}
+        {/* this code represent's the id which is considered to be unique */}
       </Routes>
     </div>
   );
