@@ -1,10 +1,15 @@
-import React from "react";
+import { useState } from "react";
+import Navbar from "../components/Navbar";
+import RateLimitedUI from "../components/RateLimitedUI";
 
 const Homepage = () => {
+  const [isRateLimited, setIsRateLimited] = useState(false);
+
   return (
-    <div>
-      <h1 color="green">This is the Homepage!</h1>
-      <p className="text-red-500">Can you see me?</p>
+    <div className="min-h-screen">
+      <Navbar />
+
+      {isRateLimited && <RateLimitedUI />}
     </div>
   );
 };

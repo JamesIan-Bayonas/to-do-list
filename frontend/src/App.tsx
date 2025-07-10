@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import toast from "react-hot-toast";
+//import toast from "react-hot-toast";
 
 import Homepage from "./pages/Homepage";
 import Createpage from "./pages/Createpage";
@@ -7,13 +7,13 @@ import NoteDetailpage from "./pages/NoteDetailpage";
 
 const App = () => {
   return (
-    <div>
-      <button
+    <div data-theme="dim">
+      {/* <button
         onClick={() => toast.success("this is the first")}
-        className="text-red-500 p-4 bg-pink-300"
+        className="btn btn-primary"
       >
         Click me
-      </button>
+      </button> */}
       <Routes>
         <Route path="/" element={<Homepage />} />{" "}
         {/* this represent the default path of the url */}
