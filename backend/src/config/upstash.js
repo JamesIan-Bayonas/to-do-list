@@ -8,18 +8,12 @@ export function initializeRatelimit() {
   const UPSTASH_REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
   const UPSTASH_REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-  console.log(
-    "DEBUG [upstash.js - initializeRatelimit]: UPSTASH_REDIS_REST_URL =",
-    UPSTASH_REDIS_URL
-  );
-  console.log(
-    "DEBUG [upstash.js - initializeRatelimit]: UPSTASH_REDIS_REST_TOKEN =",
-    UPSTASH_REDIS_TOKEN
-  );
+  console.log("Dbg UPSTASH_REDIS_REST_URL =", UPSTASH_REDIS_URL);
+  console.log("Dbg  UPSTASH_REDIS_REST_TOKEN =", UPSTASH_REDIS_TOKEN);
 
   if (!UPSTASH_REDIS_URL || !UPSTASH_REDIS_TOKEN) {
     console.error(
-      "DEBUG [upstash.js - initializeRatelimit]: Upstash Redis URL or Token is missing/undefined from process.env!"
+      "DEBUG  Upstash Redis URL or Token is missing/undefined from process.env!"
     );
     throw new Error(
       "Upstash Redis credentials are not properly set in environment variables."
@@ -33,7 +27,7 @@ export function initializeRatelimit() {
 
   const ratelimit = new Ratelimit({
     redis: redisClient,
-    limiter: Ratelimit.slidingWindow(5, "10 s"),
+    limiter: Ratelimit.slidingWindow(10, "20 s"),
   });
 
   return ratelimit;

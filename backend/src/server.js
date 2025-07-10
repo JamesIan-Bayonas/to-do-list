@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import cors from "cors";
 import { fileURLToPath } from "url";
 import notesRoute from "./routes/notesRoute.js";
 import { connectDB } from "./config/db.js";
@@ -25,14 +26,8 @@ if (result.error) {
   );
 }
 
-console.log(
-  "DEBUG: Value of UPSTASH_REDIS_REST_URL:",
-  process.env.UPSTASH_REDIS_REST_URL
-);
-console.log(
-  "DEBUG: Value of UPSTASH_REDIS_REST_TOKEN:",
-  process.env.UPSTASH_REDIS_REST_TOKEN
-);
+/* console.log("Value of REDIS_REST_URL:", process.env.UPSTASH_REDIS_REST_URL);
+console.log("Value of REDIS_REST_TOKEN:", process.env.UPSTASH_REDIS_REST_TOKEN); */
 
 // === END DEBUG LOGS ===
 
@@ -53,6 +48,9 @@ try {
 }
 
 // :: middleware ::
+
+app.use(cors({ origin: "https;//localhost:5173" }));
+
 app.use(express.json()); // this will parse the incoming request body as JSON via Postman or any other client
 
 // NEW: Create a middleware that injects the ratelimit instance
@@ -61,15 +59,16 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(rateLimiter); // Apply the rate limiter middleware
+app.use(
+  rateLimiter
+); /* :: this is used to showcase how req and res work's in express under the hood :: */ // Apply the rate limiter middleware
 
-//  :: this is used to showcase how req and res work's in express under the hood ::
-app.use((req, _, next) => {
+/* app.use((req, _, next) => {
   console.log(
     `This is the Method used ${req.method} and this is the URL request${req.url}`
   );
   next();
-});
+}); */
 app.use("/api/notes", notesRoute);
 
 connectDB().then(() => {
@@ -78,3 +77,5 @@ connectDB().then(() => {
     console.log("Server started on PORT,", PORT);
   });
 });
+
+//
