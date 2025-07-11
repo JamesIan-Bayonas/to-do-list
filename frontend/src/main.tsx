@@ -5,9 +5,14 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root");
+if (!rootElement) {
+  throw new Error('Root element with id "root" not found.');
+}
+
+createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter> 
       <App />
       <Toaster />
     </BrowserRouter>
