@@ -16,7 +16,7 @@ const rateLimiter = async (req, res, next) => {
   try {
     const { success } = await ratelimitInstance.limit("my-limit-key"); // Use the attached instance
     if (!success) {
-      return res.status(429).json({
+      return res.status(429).json({ 
         message: "Too many request, please try again later!",
       }); //:: the number 429 is used to indicate that the user has sent too many requests in a given amount of time
     }
