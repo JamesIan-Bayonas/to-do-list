@@ -12,13 +12,13 @@ const Homepage = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await axios.get("http://localhost:5173/api/notes");
+        const res = await axios.get("http://localhost:5001/api/notes");
         console.log(res.data);
         setNotes(res.data);
         setIsRateLimited(false);
       } catch (error) {
         console.log("Error fetching notes");
-        console.log(error);
+        console.log(error.response);
         if (error.response?.status === 429) {
           setIsRateLimited(true);
         } else {
@@ -28,7 +28,7 @@ const Homepage = () => {
         setLoading(false);
       }
     };
-    fetchNotes();
+    fetchNotes(); // This line of code here will call the fetchNotes function to fetch the notes from the backend.
   }, []);
 
   return (

@@ -49,7 +49,7 @@ try {
 
 // :: middleware ::
 
-app.use(cors({ origin: "https;//localhost:5173" }));
+app.use(cors({ origin: "http://localhost:5173" }));
 
 app.use(express.json()); // this will parse the incoming request body as JSON via Postman or any other client
 
