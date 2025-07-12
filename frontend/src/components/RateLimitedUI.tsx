@@ -1,5 +1,8 @@
 import { ZapIcon } from "lucide-react";
 
+/*This is a UI component that pops up a message telling the user they've made too many requests.
+  too quickly, and asks them to try again later. */
+
 const RateLimitedUI = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
