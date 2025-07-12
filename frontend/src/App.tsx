@@ -7,19 +7,22 @@ import NoteDetailpage from "./pages/NoteDetailpage";
 
 const App = () => {
   return (
-    <div data-theme="dim">
+    <div className="relative h-full w-full">
+      <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#00FF9D40_100%)]" />
+
       {/* <button
         onClick={() => toast.success("this is the first")}
         className="btn btn-primary"
       >
         Click me
       </button> */}
+
       <Routes>
-        <Route path="/" element={<Homepage />} />{" "}
+        <Route path="/" element={<Homepage />} />
         {/* this represent the default path of the url */}
-        <Route path="/create" element={<NoteDetailpage />} />{" "}
+        <Route path="/create" element={<NoteDetailpage />} />
         {/* this represent the second path  */}
-        <Route path="/note/:id" element={<Createpage />} />{" "}
+        <Route path="/note/:id" element={<Createpage />} />
         {/* this code represent's the id which is considered to be unique */}
       </Routes>
     </div>
