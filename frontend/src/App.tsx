@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
 import Createpage from "./pages/Createpage";
-import NoteDetailpage from "./pages/NoteDetailpage";
+import NoteDetailPage from "./pages/NoteDetailPage";
 
 const App = () => {
   return (
@@ -14,15 +14,15 @@ const App = () => {
         onClick={() => toast.success("this is the first")}
         className="btn btn-primary"
       >
-        Click me
+        Click me  
       </button> */}
 
       <Routes>
         <Route path="/" element={<Homepage />} />
         {/* this represent the default path of the url */}
-        <Route path="/create" element={<NoteDetailpage />} />
+        <Route path="/create" element={<Createpage />} />
         {/* this represent the second path  */}
-        <Route path="/note/:id" element={<Createpage />} />
+        <Route path="/note/:id" element={<NoteDetailPage />} />
         {/* this code represent's the id which is considered to be unique */}
       </Routes>
     </div>

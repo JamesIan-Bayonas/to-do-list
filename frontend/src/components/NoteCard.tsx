@@ -4,7 +4,8 @@ import formatDate from "../lib/utils";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
 
-const NoteCard = ({ note, setNotes }) => {
+const NoteCard = ({ setNotes, note }) => {
+  // note, setNotes
   const handleDelete = async (e, id) => {
     e.preventDefault(); // get rid of the navigation behaviour :: or refreshing the page
 
@@ -20,8 +21,9 @@ const NoteCard = ({ note, setNotes }) => {
     }
   };
   return (
+    // if the code logic above is correct, or false it will render the Homepage.tsx component
     <Link
-      to={`/note/${note._id}`}
+      to={`/note/${note._id}`} // This is the link to the note detail page
       className="card bg-base-100 hover:shadow-lg transition-all duration-200
         border-t-4 border-solid border-[#00FF9D]"
     >
@@ -40,7 +42,8 @@ const NoteCard = ({ note, setNotes }) => {
               className="btn btn-ghost btn-xs text-error"
               onClick={(e) => handleDelete(e, note._id)}
             >
-              <Trash2Icon className="size-4" />
+              <Trash2Icon className="size-4" />{" "}
+              {/* This creates the red trash bin icon */}
             </button>
           </div>
         </div>
