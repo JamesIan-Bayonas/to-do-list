@@ -9,7 +9,7 @@ export interface Note {
   // Add any other properties your note object might have from the backend
 
 
-  const [note, setNote] = useState<Note | null>(null);
+  
 
 
 }

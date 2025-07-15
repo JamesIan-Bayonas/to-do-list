@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
 import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
+import { Note } from "../types/Note";
 
 const NoteDetailPage = () => {
   //const [note, setNote] = useState(null); :: This is the original code.
@@ -101,11 +101,12 @@ const NoteDetailPage = () => {
                   type="text"
                   placeholder="Note title"
                   className="input input-bordered"
-                  //value={note.title}
                   value={note ? note.title : ""}
-                  //onChange={(e) => setNote({ ...note, title: e.target.value })}
-                  onChange={(e) =>
-                    note && setNote({ ...note, title: e.target.value })
+                  onChange={
+                    (e) => note && setNote({ ...note, title: e.target.value })
+                  /* This is the original code 
+                    /* value={note.title}
+                  onChange={(e) => setNote({ ...note, title: e.target.value })}*/
                   }
                 />
               </div>
@@ -117,9 +118,9 @@ const NoteDetailPage = () => {
                 <textarea
                   placeholder="Write your note here..."
                   className="textarea textarea-bordered h-32"
-                  value={note.content}
+                  value={note ? note.content : ""}
                   onChange={(e) =>
-                    setNote({ ...note, content: e.target.value })
+                    note && setNote({ ...note, content: e.target.value })
                   }
                 />
               </div>
