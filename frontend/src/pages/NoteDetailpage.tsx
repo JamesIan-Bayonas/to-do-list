@@ -104,7 +104,7 @@ const NoteDetailPage = () => {
                   value={note ? note.title : ""}
                   onChange={
                     (e) => note && setNote({ ...note, title: e.target.value })
-                  /* This is the original code 
+                    /* This is the original code 
                     /* value={note.title}
                   onChange={(e) => setNote({ ...note, title: e.target.value })}*/
                   }
