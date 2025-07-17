@@ -54,7 +54,7 @@ const NoteDetailPage = () => {
     setSaving(true);
 
     try {
-      await api.put(`/notes/${id}`, note);
+      await api.put(`/notes/${id}`, note); // Explain further: for me I lack insight on how this function works :::
       toast.success("Note updated successfully");
       navigate("/");
     } catch (error) {
