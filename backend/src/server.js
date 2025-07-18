@@ -8,13 +8,13 @@ import dotenv from "dotenv";
 import { initializeRatelimit } from "./config/upstash.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 
-const __filename = fileURLToPath(import.meta.url);
+/* const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const envFilePath = path.resolve(__dirname, "../../.env");
+const envFilePath = path.resolve(__dirname, "../.env");  */
 
-console.log("DEBUG: Attempting to load .env from:", envFilePath);
+//console.log("DEBUG: Attempting to load .env from:", envFilePath);
 
-const result = dotenv.config({ path: envFilePath });
+const result = dotenv.config(/* { path: envFilePath } */);
 
 if (result.error) {
   console.error("DEBUG: dotenv failed to load .env:", result.error);
@@ -25,6 +25,8 @@ if (result.error) {
     "DEBUG: dotenv.config() ran, but no variables parsed or error reported."
   );
 }
+
+what 
 
 /* console.log("Value of REDIS_REST_URL:", process.env.UPSTASH_REDIS_REST_URL);
 console.log("Value of REDIS_REST_TOKEN:", process.env.UPSTASH_REDIS_REST_TOKEN); */

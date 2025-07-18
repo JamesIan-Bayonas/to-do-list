@@ -54,9 +54,9 @@ const NoteDetailPage = () => {
     setSaving(true);
 
     try {
-      await api.put(`/notes/${id}`, note); // Explain further: for me I lack insight on how this function works :::
+      await api.put(`/notes/${id}`, note); // ::: Explain further: for me I lack insight on how this function works :::
       toast.success("Note updated successfully");
-      navigate("/");
+      navigate("/"); // ::: Redirect to homepage after saving ::: learn more about how this works later.
     } catch (error) {
       console.log("Error saving the note:", error);
       toast.error("Failed to update note");
@@ -103,7 +103,7 @@ const NoteDetailPage = () => {
                   className="input input-bordered"
                   value={note ? note.title : ""}
                   onChange={
-                    (e) => note && setNote({ ...note, title: e.target.value })
+                    (e) => note && setNote({ ...note, title: e.target.value }) // :: Make research how each line of code works?
                     /* This is the original code 
                     /* value={note.title}
                   onChange={(e) => setNote({ ...note, title: e.target.value })}*/
